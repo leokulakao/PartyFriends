@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Audio } from 'expo-av';
 import { useEffect, useState } from 'react';
 
-import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector, GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function TabOneScreen() {
 
@@ -14,6 +14,18 @@ export default function TabOneScreen() {
     setSound(sound)
     await sound.playAsync();
   }
+
+  const firstTap = Gesture.Tap().onEnd((_event, success) => {
+    if (success) {
+      console.log('firstTap', _event)
+    }
+  })
+
+  const secondTap = Gesture.Tap().numberOfTaps(2).onEnd((_event, success) => {
+    if (success) {
+      console.log('secondTap', _event)
+    }
+  })
 
   useEffect(() => {
     return sound
@@ -28,19 +40,19 @@ export default function TabOneScreen() {
     <GestureHandlerRootView style={{flex: 1}}>
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
-          
+
+          <GestureDetector gesture={Gesture.Simultaneous(firstTap, secondTap)} >
           <View style={{flex: 1, backgroundColor: 'red'}}>
-            <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={playSound}>
-            </TouchableOpacity>
+          </View>
+          </GestureDetector>
+
+          <View style={{flex: 1, backgroundColor: 'red'}}>
           </View>
           <View style={{flex: 1, backgroundColor: 'darkorange'}}>
-            <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={playSound}>
-            </TouchableOpacity>
           </View>
           <View style={{flex: 1, backgroundColor: 'green'}}>
-            <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={playSound}>
-            </TouchableOpacity>
           </View>
+          
 
         </View>
       </SafeAreaView>
