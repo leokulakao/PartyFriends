@@ -1,7 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Audio } from 'expo-av';
 import { useEffect, useState } from 'react';
+
+import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function TabOneScreen() {
 
@@ -23,19 +25,27 @@ export default function TabOneScreen() {
   }, [sound]);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={styles.container}>
-        <TouchableOpacity style={{flex: 1, backgroundColor: 'red'}} onPress={playSound}>
-          <View />
-        </TouchableOpacity>
-        <TouchableOpacity style={{flex: 1, backgroundColor: 'darkorange'}} onPress={playSound}>
-          <View />
-        </TouchableOpacity>
-        <TouchableOpacity style={{flex: 1, backgroundColor: 'green'}} onPress={playSound}>
-          <View />
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1}}>
+        <View style={styles.container}>
+          
+          <View style={{flex: 1, backgroundColor: 'red'}}>
+            <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={playSound}>
+            </TouchableOpacity>
+          </View>
+          <View style={{flex: 1, backgroundColor: 'darkorange'}}>
+            <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={playSound}>
+            </TouchableOpacity>
+          </View>
+          <View style={{flex: 1, backgroundColor: 'green'}}>
+            <TouchableOpacity style={{ width: '100%', height: '100%'}} onPress={playSound}>
+            </TouchableOpacity>
+          </View>
+
+        </View>
+      </SafeAreaView>
+    </GestureHandlerRootView>
+    
   );
 }
 
