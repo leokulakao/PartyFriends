@@ -1,63 +1,49 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { AntDesign } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
-import { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Gesture, GestureDetector, GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler';
+Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
 export default function TabOneScreen() {
-
-  const [sound, setSound] = useState<Audio.Sound>();
-
-  async function playSound() {
-    const { sound } = await Audio.Sound.createAsync( require('../assets/sounds/note.mp3'));
-    setSound(sound)
+  const firstTapIn = async () => {
+    const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/1.mp3'));
     await sound.playAsync();
-  }
+  };
 
-  const firstTap = Gesture.Tap().onEnd((_event, success) => {
-    if (success) {
-      console.log('firstTap', _event)
-    }
-  })
+  const secondTapIn = async () => {
+    const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/2.mp3'));
+    await sound.playAsync();
+  };
 
-  const secondTap = Gesture.Tap().numberOfTaps(2).onEnd((_event, success) => {
-    if (success) {
-      console.log('secondTap', _event)
-    }
-  })
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log('Unloading Sound');
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
+  const thirdTapIn = async () => {
+    const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/3.mp3'));
+    await sound.playAsync();
+  };
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <SafeAreaView style={{flex: 1}}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
-
-          <GestureDetector gesture={Gesture.Simultaneous(firstTap, secondTap)} >
-          <View style={{flex: 1, backgroundColor: 'red'}}>
+          <View style={styles.block}>
+            <View style={styles.button} onTouchStart={firstTapIn}>
+              <AntDesign name="caretup" size={32} color="white" />
+            </View>
           </View>
-          </GestureDetector>
-
-          <View style={{flex: 1, backgroundColor: 'red'}}>
+          <View style={styles.block}>
+            <View style={styles.button} onTouchStart={secondTapIn}>
+              <AntDesign name="star" size={32} color="white" />
+            </View>
           </View>
-          <View style={{flex: 1, backgroundColor: 'darkorange'}}>
+          <View style={styles.block}>
+            <View style={styles.button} onTouchStart={thirdTapIn}>
+              <AntDesign name="caretdown" size={32} color="white" />
+            </View>
           </View>
-          <View style={{flex: 1, backgroundColor: 'green'}}>
-          </View>
-          
-
         </View>
       </SafeAreaView>
     </GestureHandlerRootView>
-    
   );
 }
 
@@ -65,14 +51,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  block: {
+    flex: 1,
+    padding: 10,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  button: {
+    flex: 1,
+    height: '100%',
+    borderRadius: 10,
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
