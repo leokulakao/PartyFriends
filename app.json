@@ -22,7 +22,7 @@
         "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
         "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
       },
-      "buildNumber": "0"
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
