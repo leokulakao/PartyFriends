@@ -2,7 +2,7 @@
   "expo": {
     "name": "Party Friends",
     "slug": "PartyFriends",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -16,12 +16,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.leokulakao.partyfriends",
       "infoPlist": {
         "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
         "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
-      }
+      },
+      "buildNumber": "0"
     },
     "android": {
       "adaptiveIcon": {
@@ -58,14 +59,11 @@
         "origin": false
       },
       "eas": {
-        "projectId": "dc168b31-ed25-4c3a-9036-04f4880e07ae"
+        "projectId": "ea2e074d-02ef-4f24-b5e1-955df6ef7bc9"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/dc168b31-ed25-4c3a-9036-04f4880e07ae"
     }
   }
 }

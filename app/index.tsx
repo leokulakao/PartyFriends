@@ -1,32 +1,33 @@
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Octicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { RandomColor, useCustomColor } from '@/hooks/useRandomColor';
+import { ColorSoundsData } from '@/constants/ColorSounds';
+import { useCustomColor } from '@/hooks/useRandomColor';
 
 Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
 export default function Page() {
-  const randomColor = useCustomColor();
+  const randomColorData = useCustomColor();
 
-  const firstTapIn = async () => {
-    const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/1.mp3'));
+  const rightTapIn = async () => {
+    const { sound } = await Audio.Sound.createAsync(randomColorData.soundRight);
     await sound.playAsync();
   };
 
-  const secondTapIn = async () => {
-    const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/2.mp3'));
+  const centerTapIn = async () => {
+    const { sound } = await Audio.Sound.createAsync(randomColorData.soundCenter);
     await sound.playAsync();
   };
 
-  const thirdTapIn = async () => {
-    const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/3.mp3'));
+  const leftTapIn = async () => {
+    const { sound } = await Audio.Sound.createAsync(randomColorData.soundLeft);
     await sound.playAsync();
   };
 
-  useEffect(() => console.log(randomColor), [randomColor]);
+  useEffect(() => console.log(randomColorData), [randomColorData]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -34,19 +35,19 @@ export default function Page() {
       {/* <Link href="/camera">
         <Text>To camera</Text>
       </Link> */}
-      <View style={styles(randomColor).container}>
-        <View style={styles(randomColor).block}>
-          <View style={styles(randomColor).button} onTouchStart={firstTapIn}>
+      <View style={styles(randomColorData).container}>
+        <View style={styles(randomColorData).block}>
+          <View style={styles(randomColorData).button} onTouchStart={rightTapIn}>
             <AntDesign name="caretup" size={32} color="white" />
           </View>
         </View>
-        <View style={styles(randomColor).block}>
-          <View style={styles(randomColor).button} onTouchStart={secondTapIn}>
-            <AntDesign name="star" size={32} color="white" />
+        <View style={styles(randomColorData).block}>
+          <View style={styles(randomColorData).button} onTouchStart={centerTapIn}>
+            <Octicons name="dot-fill" size={60} color="white" />
           </View>
         </View>
-        <View style={styles(randomColor).block}>
-          <View style={styles(randomColor).button} onTouchStart={thirdTapIn}>
+        <View style={styles(randomColorData).block}>
+          <View style={styles(randomColorData).button} onTouchStart={leftTapIn}>
             <AntDesign name="caretdown" size={32} color="white" />
           </View>
         </View>
@@ -55,7 +56,7 @@ export default function Page() {
   );
 }
 
-const styles = (color: RandomColor) =>
+const styles = (colorData: ColorSoundsData) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -71,7 +72,7 @@ const styles = (color: RandomColor) =>
       flex: 1,
       height: '100%',
       borderRadius: 10,
-      backgroundColor: color,
+      backgroundColor: colorData.color,
       justifyContent: 'center',
       alignItems: 'center',
     },
