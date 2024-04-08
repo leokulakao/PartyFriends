@@ -22,7 +22,7 @@
         "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
         "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
       },
-      "buildNumber": "1"
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {
@@ -33,7 +33,8 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.leokulakao.partyfriends"
+      "package": "com.leokulakao.partyfriends",
+      "versionCode": 3
     },
     "web": {
       "bundler": "metro",
