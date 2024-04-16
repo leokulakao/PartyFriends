@@ -1,6 +1,6 @@
 import { AntDesign, Octicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -11,23 +11,47 @@ Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
 
 export default function Page() {
   const randomColorData = useCustomColor();
+  const [soundRight, setSoundRight] = useState<Audio.Sound>();
+  const [soundCenter, setSoundCenter] = useState<Audio.Sound>();
+  const [soundLeft, setSoundLeft] = useState<Audio.Sound>();
 
   const rightTapIn = async () => {
     const { sound } = await Audio.Sound.createAsync(randomColorData.soundRight);
+    setSoundRight(sound);
     await sound.playAsync();
   };
 
   const centerTapIn = async () => {
     const { sound } = await Audio.Sound.createAsync(randomColorData.soundCenter);
+    setSoundCenter(sound);
     await sound.playAsync();
   };
 
   const leftTapIn = async () => {
     const { sound } = await Audio.Sound.createAsync(randomColorData.soundLeft);
+    setSoundLeft(sound);
     await sound.playAsync();
   };
 
-  useEffect(() => console.log(randomColorData), [randomColorData]);
+  useEffect(() => {
+    if (soundRight) {
+      return () => {
+        soundRight.unloadAsync();
+      };
+    }
+
+    if (soundCenter) {
+      return () => {
+        soundCenter.unloadAsync();
+      };
+    }
+
+    if (soundLeft) {
+      return () => {
+        soundLeft.unloadAsync();
+      };
+    }
+  }, [soundRight, soundCenter, soundLeft]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
