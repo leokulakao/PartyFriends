@@ -40,9 +40,6 @@
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png",
-      "experiments": {
-        "baseUrl": "/PartyFriends"
-      }
     },
     "plugins": [
       "expo-router",
@@ -54,7 +51,8 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "baseUrl": "/PartyFriends"
     },
     "extra": {
       "router": {
