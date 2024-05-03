@@ -2,7 +2,7 @@ import { AntDesign, Ionicons, Octicons } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ColorSoundsData } from '@/constants/ColorSounds';
@@ -78,25 +78,19 @@ export default function Page() {
           {soundRight && soundCenter && soundLeft && (
             <View style={styles(randomColorData).container}>
               <View style={styles(randomColorData).block}>
-                <TouchableOpacity
-                  style={styles(randomColorData).button}
-                  onPressIn={() => play(soundRight)}>
+                <Pressable style={styles(randomColorData).button} onPress={() => play(soundRight)}>
                   <AntDesign name="caretleft" size={32} color="white" />
-                </TouchableOpacity>
+                </Pressable>
               </View>
               <View style={styles(randomColorData).block}>
-                <TouchableOpacity
-                  style={styles(randomColorData).button}
-                  onPressIn={() => play(soundCenter)}>
+                <Pressable style={styles(randomColorData).button} onPress={() => play(soundCenter)}>
                   <Octicons name="dot-fill" size={60} color="white" />
-                </TouchableOpacity>
+                </Pressable>
               </View>
               <View style={styles(randomColorData).block}>
-                <TouchableOpacity
-                  style={styles(randomColorData).button}
-                  onPressIn={() => play(soundLeft)}>
+                <Pressable style={styles(randomColorData).button} onPress={() => play(soundLeft)}>
                   <AntDesign name="caretright" size={32} color="white" />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
           )}
