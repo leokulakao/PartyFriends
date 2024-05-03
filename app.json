@@ -41,7 +41,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png",
       "experiments": {
-        "baseUrl": "/"
+        "baseUrl": "/partyfriends"
       }
     },
     "plugins": [
