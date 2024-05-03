@@ -130,7 +130,7 @@ const styles = (colorData: ColorSoundsData) =>
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
-    } ,
+    },
     block: {
       flex: 1,
       padding: 10,
